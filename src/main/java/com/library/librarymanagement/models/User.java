@@ -23,6 +23,10 @@ public class User {
     private String emailId;
     private int noOfBooksTaken;
     private Date createdOn;
+    private String username;
+    private String password;
+    private boolean isActive;
+    private String roles;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<BooksBought> booksBought;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)

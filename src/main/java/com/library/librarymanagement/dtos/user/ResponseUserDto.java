@@ -22,6 +22,10 @@ public class ResponseUserDto {
     private int noOfBooksTaken;
     private Date createdOn;
 
+    private String username;
+    private boolean isActive;
+    private String roles;
+
     private List<ResponseBoughtDto> booksBought;
 
 }

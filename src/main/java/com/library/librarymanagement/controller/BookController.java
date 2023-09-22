@@ -4,6 +4,7 @@ import com.library.librarymanagement.dtos.book.RequestBookDto;
 import com.library.librarymanagement.dtos.book.ResponseBookDto;
 import com.library.librarymanagement.exceptions.RackIsNotPresent;
 import com.library.librarymanagement.service.BookService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class BookController {
         this.bookService = bookService;
     }
     @PostMapping("/book")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<ResponseBookDto> saveBook(@RequestBody RequestBookDto requestBookDto) {
         List<ResponseBookDto> responseBookDtos = null;
         try {
@@ -28,6 +30,7 @@ public class BookController {
         return responseBookDtos;
     }
     @GetMapping("/books")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<ResponseBookDto> getAllBooks() {
         List<ResponseBookDto> responseBookDtos = bookService.findAll();
 

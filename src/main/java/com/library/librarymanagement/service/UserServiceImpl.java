@@ -9,6 +9,7 @@ import com.library.librarymanagement.models.User;
 import com.library.librarymanagement.reposotory.BooksBoughtRepository;
 import com.library.librarymanagement.reposotory.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
@@ -23,11 +24,15 @@ public class UserServiceImpl implements UserService {
 
     private ModelMapper modelMapper;
 
+    private PasswordEncoder passwordEncoder;
+
     private BooksBoughtRepository booksBoughtRepository;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BooksBoughtRepository booksBoughtRepository) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder,
+                           BooksBoughtRepository booksBoughtRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
         this.booksBoughtRepository = booksBoughtRepository;
     }
 
@@ -39,6 +44,10 @@ public class UserServiceImpl implements UserService {
         user.setEmailId(requestUserDto.getEmailId());
         user.setCreatedOn(new Date());
         user.setNoOfBooksTaken(0);
+        user.setActive(true);
+        user.setPassword(passwordEncoder.encode(requestUserDto.getPassword()));
+        user.setRoles(requestUserDto.getRoles());
+        user.setUsername(requestUserDto.getUsername());
 
         User user1 = userRepository.save(user);
         ResponseUserDto responseUserDto = modelMapper.map(user1, ResponseUserDto.class);

@@ -17,4 +17,8 @@ public class RequestUserDto {
     private String emailId;
     private int noOfBooksTaken;
     private Date createdOn;
+    private String username;
+    private String password;
+    private String roles;
+    private boolean isActive;
 }
