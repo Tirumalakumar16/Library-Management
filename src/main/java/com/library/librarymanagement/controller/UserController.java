@@ -1,11 +1,9 @@
 package com.library.librarymanagement.controller;
 
-import com.library.librarymanagement.dtos.book.user.RequestUserDto;
-import com.library.librarymanagement.dtos.book.user.ResponseUserDto;
+import com.library.librarymanagement.dtos.user.RequestUserDto;
+import com.library.librarymanagement.dtos.user.ResponseUserDto;
 import com.library.librarymanagement.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -18,5 +16,10 @@ public class UserController {
     public ResponseUserDto saveUser(@RequestBody RequestUserDto requestUserDto) {
 
         return userService.save(requestUserDto);
+    }
+    @GetMapping("/user/books/{email}")
+    public ResponseUserDto getBooksBought(@PathVariable("email") String email) {
+
+        return userService.getAllBooksBought(email);
     }
 }

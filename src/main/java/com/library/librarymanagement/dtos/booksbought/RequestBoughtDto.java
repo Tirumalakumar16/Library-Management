@@ -1,4 +1,4 @@
-package com.library.librarymanagement.dtos.book.booksbought;
+package com.library.librarymanagement.dtos.booksbought;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

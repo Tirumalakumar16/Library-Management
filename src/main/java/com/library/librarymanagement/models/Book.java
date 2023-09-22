@@ -25,8 +25,8 @@ public class Book {
     private int pages;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Rack rack;
-    @OneToOne(mappedBy = "book",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private BooksBought booksBought;
-    @OneToOne(mappedBy = "book",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private BooksReturned booksReturned;
+//    @OneToOne(mappedBy = "book",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    private BooksBought booksBought;
+//    @OneToOne(mappedBy = "book",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    private BooksReturned booksReturned;
 }

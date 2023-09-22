@@ -1,5 +1,6 @@
-package com.library.librarymanagement.dtos.book.booksbought;
+package com.library.librarymanagement.dtos.booksbought;
 
+import com.library.librarymanagement.dtos.book.ResponseBookDto;
 import com.library.librarymanagement.models.Book;
 import com.library.librarymanagement.models.User;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class ResponseBoughtDto {
-    private Book book;
+    private ResponseBookDto book;
     private Date takenOn;
     private int quantity;
-    private User user;
+
 }

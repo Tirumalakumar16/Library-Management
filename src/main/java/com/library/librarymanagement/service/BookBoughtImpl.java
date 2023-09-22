@@ -1,6 +1,6 @@
 package com.library.librarymanagement.service;
 
-import com.library.librarymanagement.dtos.book.booksbought.RequestBoughtDto;
+import com.library.librarymanagement.dtos.booksbought.RequestBoughtDto;
 import com.library.librarymanagement.models.Book;
 import com.library.librarymanagement.models.BooksBought;
 import com.library.librarymanagement.models.User;

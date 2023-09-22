@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BookRepository extends JpaRepository<Book,Long> {
     @Modifying
@@ -22,4 +24,6 @@ public interface BookRepository extends JpaRepository<Book,Long> {
     @Transactional
     @Query(value = "update library_management.book a set a.available_books=?1 where a.book_name=?2",nativeQuery = true)
     void updateBookByAvailableBooks(int books,String bookName);
+    @Query(value = "select * from library_management.book a where a.rack_id=?1",nativeQuery = true)
+    List<Book> findByRackId(Long id);
 }

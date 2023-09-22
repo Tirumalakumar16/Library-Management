@@ -1,6 +1,6 @@
 package com.library.librarymanagement.controller;
 
-import com.library.librarymanagement.dtos.book.booksbought.RequestBoughtDto;
+import com.library.librarymanagement.dtos.booksbought.RequestBoughtDto;
 import com.library.librarymanagement.service.BookBoughtService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,4 +19,6 @@ public class BookBoughtController {
 
         return bookBoughtService.save(requestBoughtDto);
     }
+
+
 }

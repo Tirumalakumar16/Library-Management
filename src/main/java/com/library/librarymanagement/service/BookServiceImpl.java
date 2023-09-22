@@ -2,13 +2,18 @@ package com.library.librarymanagement.service;
 
 import com.library.librarymanagement.dtos.book.RequestBookDto;
 import com.library.librarymanagement.dtos.book.ResponseBookDto;
+import com.library.librarymanagement.exceptions.RackIsNotPresent;
 import com.library.librarymanagement.models.Book;
+import com.library.librarymanagement.models.Rack;
 import com.library.librarymanagement.reposotory.BookRepository;
+import com.library.librarymanagement.reposotory.RackRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService{
@@ -17,28 +22,33 @@ public class BookServiceImpl implements BookService{
 
     private ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper) {
+    private RackRepository rackRepository;
+
+    public BookServiceImpl(BookRepository bookRepository,
+                           ModelMapper modelMapper, RackRepository rackRepository) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
+        this.rackRepository = rackRepository;
     }
 
     @Override
-    public ResponseBookDto saveBook(RequestBookDto requestBookDto) {
-        Book book = new Book();
-        book.setBookName(requestBookDto.getBookName());
-        book.setAvailableBooks(requestBookDto.getAvailableBooks());
-        book.setCharges(requestBookDto.getCharges());
-        book.setPages(requestBookDto.getPages());
-        book.setAuthorName(requestBookDto.getAuthorName());
-        book.setPublisherName(requestBookDto.getPublisherName());
+    public List<ResponseBookDto> saveBook(RequestBookDto requestBookDto) throws RackIsNotPresent {
 
-        bookRepository.save(book);
 
-        bookRepository.updateRackId(requestBookDto.getRackId(), requestBookDto.getBookName());
+        List<Book> updatedBooks = new ArrayList<>();
+        for(Book book1 : requestBookDto.getBooks()) {
+            Optional<Rack> rack = rackRepository.findById(requestBookDto.getRackId());
+            if(rack.isEmpty()) {
+                throw new RackIsNotPresent("the selected Rack is not present please add the rack..");
+            }
+            book1.setRack(rack.get());
+            updatedBooks.add(book1);
+        }
 
-        Book book2 =bookRepository.findByBookName(requestBookDto.getBookName());
+            List<Book> books=bookRepository.saveAll(updatedBooks);
 
-        ResponseBookDto responseBookDto = modelMapper.map(book2, ResponseBookDto.class);
+
+        List<ResponseBookDto> responseBookDto = Arrays.asList(modelMapper.map(books, ResponseBookDto[].class));
 
         return responseBookDto;
     }

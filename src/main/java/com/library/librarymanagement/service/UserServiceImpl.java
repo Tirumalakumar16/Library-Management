@@ -1,13 +1,20 @@
 package com.library.librarymanagement.service;
 
-import com.library.librarymanagement.dtos.book.user.RequestUserDto;
-import com.library.librarymanagement.dtos.book.user.ResponseUserDto;
+import com.library.librarymanagement.dtos.book.ResponseBookDto;
+import com.library.librarymanagement.dtos.booksbought.ResponseBoughtDto;
+import com.library.librarymanagement.dtos.user.RequestUserDto;
+import com.library.librarymanagement.dtos.user.ResponseUserDto;
+import com.library.librarymanagement.models.BooksBought;
 import com.library.librarymanagement.models.User;
+import com.library.librarymanagement.reposotory.BooksBoughtRepository;
 import com.library.librarymanagement.reposotory.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,9 +23,12 @@ public class UserServiceImpl implements UserService {
 
     private ModelMapper modelMapper;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    private BooksBoughtRepository booksBoughtRepository;
+
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BooksBoughtRepository booksBoughtRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.booksBoughtRepository = booksBoughtRepository;
     }
 
     @Override
@@ -35,5 +45,21 @@ public class UserServiceImpl implements UserService {
 
         return responseUserDto;
 
+    }
+
+    @Override
+    public ResponseUserDto getAllBooksBought(String email) {
+
+        User user = userRepository.findByEmailId(email);
+
+        ResponseUserDto responseUserDto = modelMapper.map(user, ResponseUserDto.class);
+
+        List<BooksBought> booksBoughtList = booksBoughtRepository.findByuserId(user.getId());
+
+        List<ResponseBoughtDto> responseBoughtDtos = Arrays.asList(modelMapper.map(booksBoughtList, ResponseBoughtDto[].class));
+
+        responseUserDto.setBooksBought(responseBoughtDtos);
+
+        return responseUserDto;
     }
 }

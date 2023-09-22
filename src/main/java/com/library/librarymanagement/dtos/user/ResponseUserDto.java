@@ -1,5 +1,6 @@
-package com.library.librarymanagement.dtos.book.user;
+package com.library.librarymanagement.dtos.user;
 
+import com.library.librarymanagement.dtos.booksbought.ResponseBoughtDto;
 import com.library.librarymanagement.models.BooksBought;
 import com.library.librarymanagement.models.BooksReturned;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,6 @@ public class ResponseUserDto {
     private int noOfBooksTaken;
     private Date createdOn;
 
-    private List<BooksBought> booksBought;
-    private List<BooksReturned> booksReturned;
+    private List<ResponseBoughtDto> booksBought;
+
 }
