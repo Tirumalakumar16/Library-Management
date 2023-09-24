@@ -1,5 +1,7 @@
 package com.library.librarymanagement.config;
 
+import com.library.librarymanagement.service.BooksBoughtService;
+import com.library.librarymanagement.service.BooksBoughtServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +21,5 @@ public class AppConfig {
             throws Exception {
         return configuration.getAuthenticationManager();
     }
+
 }

@@ -14,11 +14,11 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book,Long> {
     @Modifying
     @Transactional
-    @Query(value = "update book a  set a.rack_id=?1 where a.book_name=?2",nativeQuery = true)
+    @Query(value = "update library_management.book a  set a.rack_id=?1 where a.book_name=?2",nativeQuery = true)
     void updateRackId( int rackId,String bookName);
     @Query(value = "select * from library_management.book a where a.book_name=?1",nativeQuery = true)
     Book findByBookName(String bookName);
-    @Query(value = "select * from rack r where r.rack_number=?1",nativeQuery = true)
+    @Query(value = "select * from library_management.rack r where r.rack_number=?1",nativeQuery = true)
     Rack findByRackNumber(int rackId);
     @Modifying
     @Transactional

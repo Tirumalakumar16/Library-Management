@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 public class UserController {
     private UserService userService;
@@ -31,11 +33,11 @@ public class UserController {
 
         return userService.save(requestUserDto);
     }
-    @GetMapping("/user/books/{email}")
+    @GetMapping("/user/books")
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
-    public ResponseUserDto getBooksBought(@PathVariable("email") String email) {
-
-        return userService.getAllBooksBought(email);
+    public ResponseUserDto getBooksBought(Principal principal) {
+        String userName = principal.getName();
+        return userService.getAllBooksBought(userName);
     }
 
 

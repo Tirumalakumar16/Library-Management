@@ -16,6 +16,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -57,9 +58,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseUserDto getAllBooksBought(String email) {
+    public ResponseUserDto getAllBooksBought(String userName) {
 
-        User user = userRepository.findByEmailId(email);
+        Optional<User> user1 = userRepository.findByUsername(userName);
+
+        User user = userRepository.findByEmailId(user1.get().getEmailId());
 
         ResponseUserDto responseUserDto = modelMapper.map(user, ResponseUserDto.class);
 

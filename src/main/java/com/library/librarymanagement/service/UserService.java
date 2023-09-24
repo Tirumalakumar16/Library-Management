@@ -6,5 +6,5 @@ import com.library.librarymanagement.dtos.user.ResponseUserDto;
 public interface UserService {
     ResponseUserDto save(RequestUserDto requestUserDto);
 
-    ResponseUserDto getAllBooksBought(String email);
+    ResponseUserDto getAllBooksBought(String userName);
 }

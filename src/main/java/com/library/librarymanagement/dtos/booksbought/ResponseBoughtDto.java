@@ -1,6 +1,7 @@
 package com.library.librarymanagement.dtos.booksbought;
 
 import com.library.librarymanagement.dtos.book.ResponseBookDto;
+import com.library.librarymanagement.dtos.user.ResponseUserDto;
 import com.library.librarymanagement.models.Book;
 import com.library.librarymanagement.models.User;
 import lombok.AllArgsConstructor;
@@ -18,5 +19,6 @@ public class ResponseBoughtDto {
     private ResponseBookDto book;
     private Date takenOn;
     private int quantity;
+    private ResponseUserDto user;
 
 }

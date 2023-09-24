@@ -30,7 +30,7 @@ public class BookController {
         return responseBookDtos;
     }
     @GetMapping("/books")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAnyAuthority('ROLE_USER')")
     public List<ResponseBookDto> getAllBooks() {
         List<ResponseBookDto> responseBookDtos = bookService.findAll();
 
