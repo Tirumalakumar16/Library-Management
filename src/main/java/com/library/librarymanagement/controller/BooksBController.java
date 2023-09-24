@@ -1,26 +1,35 @@
 package com.library.librarymanagement.controller;
 
 import com.library.librarymanagement.dtos.booksbought.RequestBoughtDto;
-import com.library.librarymanagement.service.BookBoughtService;
+import com.library.librarymanagement.dtos.booksbought.ResponseBoughtDto;
+import com.library.librarymanagement.service.BooksBoughtService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-public class BookBoughtController {
-
-    private BookBoughtService bookBoughtService;
-
-    public BookBoughtController(BookBoughtService bookBoughtService) {
+public class BooksBController {
+    private BooksBoughtService bookBoughtService;
+    @Autowired
+    public BooksBController(BooksBoughtService bookBoughtService) {
         this.bookBoughtService = bookBoughtService;
     }
+
     @PostMapping("/purchase")
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     private String purchase(@RequestBody RequestBoughtDto requestBoughtDto) {
 
+
         return bookBoughtService.save(requestBoughtDto);
     }
+    @GetMapping("/purchases")
+    public List<ResponseBoughtDto> getAllBooksBought() {
 
-
+        return bookBoughtService.getAll();
+    }
 }

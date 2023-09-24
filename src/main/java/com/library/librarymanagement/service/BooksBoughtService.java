@@ -1,7 +1,12 @@
 package com.library.librarymanagement.service;
 
 import com.library.librarymanagement.dtos.booksbought.RequestBoughtDto;
+import com.library.librarymanagement.dtos.booksbought.ResponseBoughtDto;
 
-public interface BookBoughtService {
+import java.util.List;
+
+public interface BooksBoughtService {
     String save(RequestBoughtDto requestBoughtDto);
+
+    List<ResponseBoughtDto> getAll();
 }
