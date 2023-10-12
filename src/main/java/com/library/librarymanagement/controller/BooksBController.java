@@ -14,22 +14,23 @@ import java.util.List;
 
 @RestController
 public class BooksBController {
-    private BooksBoughtService bookBoughtService;
+    private final BooksBoughtService booksBoughtService;
     @Autowired
-    public BooksBController(BooksBoughtService bookBoughtService) {
-        this.bookBoughtService = bookBoughtService;
+    public BooksBController(BooksBoughtService booksBoughtService) {
+        this.booksBoughtService = booksBoughtService;
     }
+
 
     @PostMapping("/purchase")
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     private String purchase(@RequestBody RequestBoughtDto requestBoughtDto) {
 
 
-        return bookBoughtService.save(requestBoughtDto);
+        return booksBoughtService.save(requestBoughtDto);
     }
     @GetMapping("/purchases")
     public List<ResponseBoughtDto> getAllBooksBought() {
 
-        return bookBoughtService.getAll();
+        return booksBoughtService.getAll();
     }
 }

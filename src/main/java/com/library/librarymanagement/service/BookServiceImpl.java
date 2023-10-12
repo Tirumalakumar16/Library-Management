@@ -8,6 +8,7 @@ import com.library.librarymanagement.models.Rack;
 import com.library.librarymanagement.reposotory.BookRepository;
 import com.library.librarymanagement.reposotory.RackRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class BookServiceImpl implements BookService{
     private ModelMapper modelMapper;
 
     private RackRepository rackRepository;
-
+    @Autowired
     public BookServiceImpl(BookRepository bookRepository,
                            ModelMapper modelMapper, RackRepository rackRepository) {
         this.bookRepository = bookRepository;
