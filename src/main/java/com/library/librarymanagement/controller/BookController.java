@@ -4,6 +4,7 @@ import com.library.librarymanagement.dtos.book.RequestBookDto;
 import com.library.librarymanagement.dtos.book.ResponseBookDto;
 import com.library.librarymanagement.exceptions.RackIsNotPresent;
 import com.library.librarymanagement.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class BookController {
 
     private BookService bookService;
-
+    @Autowired
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }

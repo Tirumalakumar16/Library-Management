@@ -5,6 +5,7 @@ import com.library.librarymanagement.dtos.user.RequestUserDto;
 import com.library.librarymanagement.dtos.user.ResponseUserDto;
 import com.library.librarymanagement.service.UserService;
 import com.library.librarymanagement.service.security.JwtService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,7 @@ public class UserController {
     private JwtService jwtService;
 
     private AuthenticationManager authenticationManager;
-
+    @Autowired
     public UserController(UserService userService, JwtService jwtService, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.jwtService = jwtService;

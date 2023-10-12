@@ -3,6 +3,7 @@ package com.library.librarymanagement.controller;
 import com.library.librarymanagement.dtos.rack.RequestRackDto;
 import com.library.librarymanagement.dtos.rack.ResponseRackDto;
 import com.library.librarymanagement.service.RackService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import java.util.List;
 public class RackController {
 
     private RackService rackService;
-
+    @Autowired
     public RackController(RackService rackService) {
         this.rackService = rackService;
     }

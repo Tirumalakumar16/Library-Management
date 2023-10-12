@@ -13,6 +13,7 @@ import com.library.librarymanagement.reposotory.RackRepository;
 import com.library.librarymanagement.reposotory.SectionRepository;
 import com.library.librarymanagement.service.section.SectionService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class RackServiceImpl implements RackService {
     private SectionRepository sectionRepository;
 
     private BookRepository bookRepository;
-
+    @Autowired
     public RackServiceImpl(RackRepository rackRepository, ModelMapper modelMapper,
                            SectionRepository sectionRepository,
                            BookRepository bookRepository) {

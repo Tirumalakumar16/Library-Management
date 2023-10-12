@@ -9,6 +9,7 @@ import com.library.librarymanagement.models.User;
 import com.library.librarymanagement.reposotory.BooksBoughtRepository;
 import com.library.librarymanagement.reposotory.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     private BooksBoughtRepository booksBoughtRepository;
-
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder,
                            BooksBoughtRepository booksBoughtRepository) {
         this.userRepository = userRepository;
